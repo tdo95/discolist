@@ -2,17 +2,18 @@
 * {
      box-sizing: border-box;
 }
-
 /* Clear fix hack */
 .clearfix:after {
-     content: ".";
+     height: 0;
+
      display: block;
+
+     line-height: 0;
+
      clear: both;
      visibility: hidden;
-     line-height: 0;
-     height: 0;
+     content: ".";
 }
-
 .clear {
 	clear: both;
 }
@@ -21,22 +22,57 @@
 /* BASE STYLES
 /*******************************************/
 
-body {
-
+html {
+     font-size: 62.5%;
 }
+body {
+     height: 100vh;
+     
+     font-family: 'Raleway', sans-serif;
+     color: #FFFFFF;
 
-
+     background-color: #030303;
+}
+.title {
+     
+}
 /******************************************
 /* LAYOUT
 /*******************************************/
-header {
+.nav {
+     height: 100px;
+     padding: 20px;
 
+     display: flex;
 }
+.logo {
+     height: 100%;
+}
+.landing {
+     margin-top: 100px;
 
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+}
+.input, .title, .title-prefix {
+     width: 50%;
+}
 footer {
+     width: 100%;
 
+     position: absolute;
+     bottom: 0;
+
+     text-align: center;   
 }
 
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+@media screen and (max-width: 800px) {
+     .input, .title, .title-prefix {
+          width: 75%;
+     }
+     
+}
