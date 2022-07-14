@@ -77,6 +77,10 @@ body {
      display: flex;
      align-items: center;
 }
+.search_icon {
+     height: 2rem;
+     width: auto;
+}
 .search_input {
      height: 100%;
      width: 50rem;
@@ -153,7 +157,8 @@ input[type="search"]::-webkit-search-cancel-button {
 @media screen and (max-width: 350px) {
      .nav {
           padding: 20px 15px;
-     }
-     
-     
+     }    
+}
+.hidden {
+     display: none;
 }
