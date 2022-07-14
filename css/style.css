@@ -29,18 +29,26 @@ body {
      height: 100vh;
      
      font-family: 'Raleway', sans-serif;
+     font-weight: 600;
      color: #FFFFFF;
 
      background-color: #030303;
 }
 .title {
-     
+     margin: .5rem 0;
+
+     font-family: 'Monoton', sans-serif;
+     font-weight: 400;
+     font-size: 10rem;
+}
+.title-prefix {
+     font-size: 4rem;
 }
 /******************************************
 /* LAYOUT
 /*******************************************/
 .nav {
-     height: 100px;
+     height: 120px;
      padding: 20px;
 
      display: flex;
@@ -54,9 +62,11 @@ body {
      display: flex;
      flex-direction: column;
      align-items: center;
+
 }
+/* NOTE: Set width accoriding to font size */
 .input, .title, .title-prefix {
-     width: 50%;
+     width: 59rem;
 }
 footer {
      width: 100%;
@@ -70,9 +80,25 @@ footer {
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
-@media screen and (max-width: 800px) {
-     .input, .title, .title-prefix {
-          width: 75%;
+@media screen and (max-width: 650px) {
+     /* NOTE: Set width accoriding to font size */
+     .title {
+          font-size: 5rem;
      }
+     .title-prefix {
+          font-size: 2rem;
+     }
+     .input, .title, .title-prefix {
+          width: 29.5rem;
+     }
+     .logo {
+          height: 90%;
+     }
+}
+@media screen and (max-width: 350px) {
+     .nav {
+          padding: 20px 15px;
+     }
+     
      
 }
