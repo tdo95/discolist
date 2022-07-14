@@ -65,8 +65,21 @@ body {
 
 }
 /* NOTE: Set width accoriding to font size */
-.input, .title, .title-prefix {
+.search, .title, .title-prefix {
      width: 59rem;
+}
+.search {
+     height: 4rem;
+     padding: 0 20px;
+     
+     border: 2px solid #FFFFFF;
+     border-radius: 20px;
+}
+.input {
+     height: 100%;
+     width: 50rem;
+     border: none;
+     background-color: rgba(0, 0, 0, 0);  
 }
 footer {
      width: 100%;
@@ -88,7 +101,7 @@ footer {
      .title-prefix {
           font-size: 2rem;
      }
-     .input, .title, .title-prefix {
+     .search, .title, .title-prefix {
           width: 29.5rem;
      }
      .logo {
