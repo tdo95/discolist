@@ -26,7 +26,7 @@ html {
      font-size: 62.5%;
 }
 body {
-     height: 100vh;
+     /* height: 100vh; */
      
      font-family: 'Raleway', sans-serif;
      font-weight: 600;
@@ -71,8 +71,8 @@ body {
 footer {
      width: 100%;
 
-     /* position: absolute; */
-     /* bottom: 0; */
+     position: absolute;
+     bottom: 0;
 
      text-align: center;   
 }
