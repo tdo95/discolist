@@ -26,8 +26,6 @@ html {
      font-size: 62.5%;
 }
 body {
-     /* height: 100vh; */
-     
      font-family: 'Raleway', sans-serif;
      font-weight: 600;
      color: #FFFFFF;
@@ -75,16 +73,21 @@ body {
      border: 2px solid #FFFFFF;
      border-radius: 20px;
 }
-.input {
+.search_icon {
+     display: inline-block;
+     width: 4rem;
+}
+.search_input {
      height: 100%;
      width: 50rem;
+
      border: none;
      background-color: rgba(0, 0, 0, 0);  
 }
 footer {
      width: 100%;
 
-     position: absolute;
+     position: fixed;
      bottom: 0;
 
      text-align: center;   
