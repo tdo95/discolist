@@ -18,10 +18,11 @@
 		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
-		<section id="home">
+		<!-- HOME SCREEN -->
+		<section id="home" class="hidden">
 			<header>
 				<nav class="nav">
-					<a href=""><img class="logo" src="Icon.png" alt="DiscoList Home"></a>
+					<img class="logo" src="Icon.png" alt="DiscoList Home">
 				</nav>
 			</header>
 			<section class="landing">
@@ -38,7 +39,44 @@
 				<a href="#">Tee O.</a>
 			</footer>
 		</section>
-		<section id="catalog">
+		<!-- CATALOG SCREEN -->
+		<section id="catalog" class="">
+			<header>
+				<nav class="nav catalog">
+					<img class="logo" src="Icon.png" alt="DiscoList Home">
+					<span class="title small">DISCOLIST</span>
+					<form class="search" action="">
+						<img class="search_icon" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/search--v1.png"/><input class="search_input" type="search" autofocus>
+					</form>
+				</nav>
+			</header>
+			<section>
+				<section class="artist-info-block">
+					<h1>Artist Name</h1>
+					<button>Timeline</button>
+				</section>
+				<section class="catalog-block">
+					<section class="projects">
+						<h2 class="medium-size">Music Catalog</h2>
+						<section class="project-group">
+							<h3>PROJECT TYPE</h3>
+							<section class="project-cards">
+								<div class="card">
+									<img src="" alt="Cover Image" class="card_image">
+									<h4 class="card_title">Title</h4>
+									<span class="card_type">Type &#8226; <span class="card_year">Year</span></span>
+
+								</div>
+							</section>
+						</section>
+					</section>
+					<section class="timeline hidden">
+
+					</section>
+				</section>
+			</section>
+		
+
 
 		</section>
 		<section id="timeline">
