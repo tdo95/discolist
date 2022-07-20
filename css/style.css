@@ -54,7 +54,7 @@ body {
 /* LAYOUT
 /*******************************************/
 
-/* HOME PAGE STYLES */
+/* ----------HOME PAGE STYLES---------- */
 
 .nav {
      height: 120px;
@@ -140,7 +140,7 @@ input[type="search"]::-webkit-search-cancel-button {
      color: rgba(255, 255, 255, 1);
 }
 
-/* CATALOG PAGE STYLES */
+/* ----------CATALOG PAGE STYLES---------- */
 
 .nav.catalog {
      height: 100px;
@@ -164,7 +164,7 @@ input[type="search"]::-webkit-search-cancel-button {
      justify-content: space-between;
      align-items: center;
 }
-.artist-info-block button {
+.artist-info-block .timeline-btn {
      padding: .5rem 2rem;
 
      font-size: 2.5rem;
@@ -226,6 +226,48 @@ input[type="search"]::-webkit-search-cancel-button {
 .card_type {
      font-weight: 400;
 }
+
+/* ----------TIMELINE PAGE STYLES---------- */
+.catalog-btn {
+     width: 20rem;
+     padding-left: 30px;
+
+     color: #FFFFFF;
+     font-size: 2rem;
+
+     border: none;
+     background: transparent url(https://img.icons8.com/ios/25/FFFFFF/long-arrow-left.png) no-repeat left;
+     
+}
+.catalog-btn:hover {
+     color: #33AA29;
+
+     background: transparent url(https://img.icons8.com/ios/25/33AA29/long-arrow-left.png) no-repeat left;
+     
+}
+.timeline h2 {
+     text-align: center;
+     margin-bottom: 2rem;
+}
+.year-group {
+     display: flex;
+     gap: 30px;
+}
+.year-marker {   
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+}
+.year-marker h3, .line {
+     width: fit-content;
+}
+.year-marker h3 {
+     font-size: 2.5rem;
+}
+.line {
+     height: 50px;
+     border-left: solid 1px #FFFFFF;
+}
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
@@ -255,7 +297,12 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 /* CATALOG PAGE STYLES */
-
+@media screen and (max-width: 830px) {
+     /* Decreases artist info name and button size for mobile*/
+     .artist-info-block h1 {
+          font-size: 6rem;
+     }
+}
 @media screen and (max-width: 730px) {
      /* Converts searchbox to single icon for mobile */
      .nav.catalog .search{
@@ -287,13 +334,35 @@ input[type="search"]::-webkit-search-cancel-button {
      .medium-size {
           font-size: 2.8rem;
      }
-     .project-group h3 {
+     .project-group h3, .year-marker h3 {
           font-size: 2rem;
      }
      .card {
           height: 24rem;
           width: 18rem;
      }
+     .artist-info-block .catalog-btn {
+          width: 15rem;
+          font-size: 1.4rem;
+     }
+}
+@media screen and (max-width: 450px) {
+     .year-group {
+          flex-direction: column;
+          gap: 10px;
+     }
+     .year-marker h3 {
+          margin: 0;
+     }
+     .line {
+          height: 0;
+          border-left: none ;
+     }
+}
+@media screen and (max-width: 400px) {
+     .artist-info-block .catalog-btn {
+          width: 10rem;
+     }  
 }
 @media screen and (max-width: 350px) {
      .nav {
