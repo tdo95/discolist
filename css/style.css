@@ -286,8 +286,6 @@ input[type="search"]::-webkit-search-cancel-button {
      position: fixed;
      top: 10%;
      left: 30%;
-
-     background: blue;
 }
 .project-info {
      height: 25%;
@@ -296,7 +294,8 @@ input[type="search"]::-webkit-search-cancel-button {
      align-items: center;
      gap: 15px;
 
-     background: purple;
+     background: linear-gradient(rgba(255,255, 255, .1), rgba(255,255, 255, .025)),
+                 linear-gradient(rgba(17,17,17,1), rgba(17,17,17,1));
 }
 .project-image {
      width: 25%;
@@ -308,7 +307,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 }
 .details_title {
-     margin: 5px 0;
+     margin: 8px 0;
 
      font-size: 2rem;
 }
@@ -325,7 +324,7 @@ input[type="search"]::-webkit-search-cancel-button {
 .tracklist {
      height: 75%;
 
-     background-color: green;
+     background-color: #121212;
 }
 .track {
      padding: 15px 25px;
