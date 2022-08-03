@@ -1,0 +1,30 @@
+{
+  "name": "discolist",
+  "version": "1.0.0",
+  "description": "'Look up the discography of music artists'",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdo95/discolist.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tdo95/discolist/issues"
+  },
+  "homepage": "https://github.com/tdo95/discolist#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-rate-limit": "^6.5.1",
+    "node-fetch": "^3.2.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
