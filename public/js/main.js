@@ -6,6 +6,7 @@ let searchInput = document.querySelector('.catalog .search_input')
 let title = document.querySelector('.title.small');
 searchIcon.addEventListener('click', toggleSearchBox);
 let toggled;
+searchInput.addEventListener('focus', toggleSearchBox);
 function toggleSearchBox() {
 
     if (window.innerWidth <= 730) {
