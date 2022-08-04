@@ -2,6 +2,7 @@
 //searchbox open and close animation (for mobile)
 let searchIcon = document.querySelector('.catalog .search_icon');
 let searchBox = document.querySelector('.catalog .search');
+let searchInput = document.querySelector('.catalog .search_input')
 let title = document.querySelector('.title.small');
 searchIcon.addEventListener('click', toggleSearchBox);
 let toggled;
@@ -11,20 +12,22 @@ function toggleSearchBox() {
         if (!toggled) {
             searchBox.classList.add('search_open');
             title.classList.add('hidden');
+            searchInput.style.width = '180px'
             toggled = true;
             console.log('TOGGLED!')
         }
         else {
             searchBox.classList.remove('search_open');
             title.classList.remove('hidden');
+            searchInput.style.width = '0px'
             toggled = false;
         }   
     } 
 }
 
 //Get search input and fetch artists results
-let searchInput = document.querySelectorAll('.search_input');
-searchInput.forEach(element => element.addEventListener('input', () => getSearchResults(element)));
+let searchInputs = document.querySelectorAll('.search_input');
+searchInputs.forEach(element => element.addEventListener('input', () => getSearchResults(element)));
 
 let timeout;
 function getSearchResults(e) {
