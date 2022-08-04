@@ -10,7 +10,7 @@ const spotify = require("./spotifyRelay");
 app.use(express.json());
 
 //URLS permited to access the routes
-const whitelist = []
+const whitelist = [];
 
 //protects routes 
 const corsOptions = {

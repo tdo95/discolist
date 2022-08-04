@@ -5,6 +5,7 @@ const router = express.Router();
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 //send request to authorization server to recieve access token
+var expires;
 async function authorize() {
     let params = new URLSearchParams();
     params.append("grant_type", "client_credentials");
@@ -21,25 +22,36 @@ async function authorize() {
             redirect: 'follow'
         });
         const data = await response.json();
-        return data.access_token;
+        expires = new Date().getTime() + (data.expires_in * 1000);
+        return data.access_token
 
     } catch (err) {
         return {Error: err.stack}
     }
 }
 
-//fetch list of first 10 results of artists search based upon query entered
+//fetches token, if current token expired fetches new token
+let token;
+const getToken = async () => {
+    let currentTime = new Date().getTime();
+    if(!expires || currentTime - expires >= 0) {
+        token = await authorize();
+    }
+    return token;
+}
+
+//fetch list of results of artists search based upon query entered
 const fetchArtists = async (searchtext) => {
-    const token = await authorize();
+    let token = await getToken();
     
-    const fetchHeaders = new Headers();
-    fetchHeaders.append("Authorization", `Bearer ${token}`);
+    const requestHeaders = new Headers();
+    requestHeaders.append("Authorization", `Bearer ${token}`);
 
     const requestOptions = {
         method: 'GET',
-        headers: fetchHeaders,
+        headers: requestHeaders,
     }
-    const url = `https://api.spotify.com/v1/search?q=${searchtext}&type=artist&limit=10`;
+    const url = `https://api.spotify.com/v1/search?q=artist:${searchtext}&type=artist&limit=5`;
 
     try {
         const artistList =  await fetch(url, requestOptions);
@@ -47,6 +59,7 @@ const fetchArtists = async (searchtext) => {
         return artistListJson;
 
     } catch (err) {
+
         return { Error: err.stack };
     }
 } 
