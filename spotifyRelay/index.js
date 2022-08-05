@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-//Fetch no longer suppoerts CommonJS, use import to load it in asynchronously instead
+//Node-fetch no longer supports CommonJS, use import to load it in asynchronously instead
 //See: https://github.com/node-fetch/node-fetch#commonjs
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 

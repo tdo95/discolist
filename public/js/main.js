@@ -48,7 +48,6 @@ async function fetchArtists(input) {
     try {
         let response = await fetch(`http://localhost:3000/spotifyRelay/${input}`);
         let data = await response.json();
-        console.log(data)
         return data.artists.items;
     } catch (err) {
         console.log(err);
@@ -68,13 +67,16 @@ class Artist {
 //Generates artist objects from data returned from fetch
 let artistList;
 function makeArtistObjects(artists) {
-    console.log(artists)
-    artistList = []; //global 
-    if (artists)
+    artistList = {}; //global
+    // only set to null if input is empty, if input is empty fetch returns undefined
+    if (artists === undefined) artistList = null;
+    else {
         for (let person of artists) {
-            artistList.push(new Artist(person.name, person.href, person.images[0], person.id, person.popularity))
+            let artist = new Artist(person.name, person.href, person.images[0], person.id, person.popularity);
+            artistList[artist.name] = artist;
         }
-    console.log(artistList);
+    }
+    console.log(artists, artistList);
 }
 //displays artist results in DOM
 function displayArtistsResults() {
@@ -88,26 +90,61 @@ function displayArtistsResults() {
         dropdown = document.querySelector(`#${element.id} .search_dropdown`);
         console.log(dropdown)
     });
-    console.log(dropdown, artistList.length)
+    console.log(dropdown);
     
     //clear previous results
     while (dropdown.firstChild) dropdown.removeChild(dropdown.firstChild);
 
-    //append artists to dropdown
-    if (artistList.length) {
-        
-        //add new artist results
-        artistList.forEach(artist => {
-            
-            let block = document.createElement('p')
-            block.innerText = artist.name;
-            block.classList.add('search_dropdown_entry');
-            console.log(block)
-            dropdown.appendChild(block)
-        })
+    //skips if there is no search result
+    if (!artistList) return;
+
+    //append empty search message
+    if (Object.keys(artistList).length === 0) {
+        let block = document.createElement('p');
+        block.innerHTML = '<span>Looks like we don\'t have that artist 🥺 <br><br>Try another search.</span>';       
+        block.classList.add('search_dropdown_message');
+        dropdown.appendChild(block);
     }
-
-
+    //append artists to dropdown
+    else {
+        for (let artist in artistList) {
+            let block = document.createElement('p');
+            block.innerText = artist;
+            block.classList.add('search_dropdown_entry');
+            block.addEventListener('click', () => displayCatalog(artist));
+            dropdown.appendChild(block);
+        }
+    }
         
 }
 
+//Display artist catalog
+async function displayCatalog(artistName) {
+    console.log(artistName)
+
+    //fetch results
+
+    closeWindow()
+    
+    await waitFor(1000);
+
+    //input results in window
+    openWindow()
+    
+
+}
+
+function closeWindow() {
+    let page = document.querySelector('.window_cover');
+    page.classList.remove('widen');
+    page.classList.add('close');
+}
+
+function openWindow() {
+    let page = document.querySelector('.window_cover');
+    page.classList.remove('close')
+    page.classList.add('widen')
+
+}
+
+const waitFor = delay => new Promise(resolve => setTimeout(resolve, delay));

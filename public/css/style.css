@@ -144,6 +144,12 @@ body {
 .search_dropdown_entry:hover {
      color: #33AA29;
 }
+.search_dropdown_message {
+     height: 6rem;
+     padding: 1rem 2rem;
+     text-align: center;
+
+}
 /* input[type="search"]::-webkit-search-cancel-button {
      -webkit-appearance: none;
      cursor: pointer;
@@ -385,6 +391,35 @@ body {
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+
+/* close window animation */
+.close {
+     animation: close .5s forwards;
+}
+@keyframes close {
+     100% {
+          height: 100vh;
+     }
+     
+}
+.widen {
+     animation: widen 1s backwards;
+}
+@keyframes widen {
+     0% {
+          height: 100vh;
+     }
+     100% {
+          height: 0;
+     }   
+}
+.window_cover {
+     background-color: #030303;
+     position: absolute;
+     bottom: 0;
+     width: 100%;
+     height: 0;
+}
 
 /* HOME PAGE STYLES */
 
