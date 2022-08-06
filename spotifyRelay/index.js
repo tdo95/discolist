@@ -77,9 +77,52 @@ router.get('/:searchtext', async (req, res) => {
 })
 
 router.post("/",async (req,res) => {
-    const searchtext = req.body.searchtext;
-    const data = await fetchArtists(searchtext);
-    res.json(data);
+    const id = req.body.id;
+    console.log(req.body)
+    if (id) {
+        let data = await fetchAlbums(id);
+        res.json(data);
+    }
+    
+    else res.json('Did not work shawty');
+    //const data = await fetchArtists(searchtext);
+    
 })
+
+async function fetchAlbums(artistId) {
+    let token = await getToken();
+
+    const requestHeaders = new Headers();
+    requestHeaders.append("Authorization", `Bearer ${token}`);
+
+    const requestOptions = {
+        method: 'GET',
+        headers: requestHeaders,
+    }
+    try {
+        let response = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album,single,compilation&limit=50`, requestOptions);
+        
+        let data = await response.json();
+        let albums = data.items;
+        let nextLink = data.next;
+        
+        albums = await paginate(nextLink, requestOptions, albums);
+        return albums;
+    } catch (err) {
+        return { Error: err.stack }
+    }
+}
+//iterates through album list pages and adds all albums to array
+async function paginate(url, reqOptions, albumList) {
+    console.log('paginating....')
+    while (url) {
+        let res = await fetch(url, reqOptions);
+        let data = await res.json();
+        albumList = albumList.concat(data.items);
+        url = data.next;
+    }
+    return albumList;
+
+}
 
 module.exports = router;

@@ -6,14 +6,21 @@ let searchInput = document.querySelector('.catalog .search_input')
 let title = document.querySelector('.title.small');
 searchIcon.addEventListener('click', toggleSearchBox);
 let toggled;
-searchInput.addEventListener('focus', toggleSearchBox);
+searchInput.addEventListener('focus', () => {
+    if (window.innerWidth <= 730) {
+        searchBox.classList.add('search_open');
+        title.classList.add('hidden');
+        searchInput.style.width = window.innerWidth < 400 ? '160px' : '180px';
+        toggled = true;
+    }
+});
 function toggleSearchBox() {
 
     if (window.innerWidth <= 730) {
         if (!toggled) {
             searchBox.classList.add('search_open');
             title.classList.add('hidden');
-            searchInput.style.width = '180px'
+            searchInput.style.width = window.innerWidth < 400 ? '160px' : '180px';
             toggled = true;
             console.log('TOGGLED!')
         }
@@ -38,7 +45,7 @@ function getSearchResults(e) {
         let data = await fetchArtists(e.value)
         makeArtistObjects(data);
         displayArtistsResults();
-    }, 350);
+    }, 450);
 }
 
 //fetch artists from Spotify API via API Relay on server
@@ -80,20 +87,8 @@ function makeArtistObjects(artists) {
 }
 //displays artist results in DOM
 function displayArtistsResults() {
-    //find which dropdown screen is active
-    //TODO: Make this more effiecient (maybe use a varaible to signify which screen is open)
-    let dropdown;
-    let options = document.querySelectorAll('#home, #catalog');
-    options.forEach(element => {
-        let hidden = element.classList.contains('hidden');
-        if (hidden) return;
-        dropdown = document.querySelector(`#${element.id} .search_dropdown`);
-        console.log(dropdown)
-    });
-    console.log(dropdown);
-    
-    //clear previous results
-    while (dropdown.firstChild) dropdown.removeChild(dropdown.firstChild);
+   //returns dropdown that's active
+    let dropdown = resetScreen();
 
     //skips if there is no search result
     if (!artistList) return;
@@ -108,7 +103,7 @@ function displayArtistsResults() {
     //append artists to dropdown
     else {
         for (let artist in artistList) {
-            let block = document.createElement('p');
+            let block = document.createElement('button');
             block.innerText = artist;
             block.classList.add('search_dropdown_entry');
             block.addEventListener('click', () => displayCatalog(artist));
@@ -120,17 +115,146 @@ function displayArtistsResults() {
 
 //Display artist catalog
 async function displayCatalog(artistName) {
-    console.log(artistName)
-
-    //fetch results
-
-    closeWindow()
+    //get artist ID
+    let id = artistList[artistName].id;
     
-    await waitFor(1000);
+    closeWindow()
 
+    await waitFor(500);
+    //fetch catalog
+    let albums = await fetchAlbums(id);
+    makeAlbumObjects(albums);
+    //reset screen values
+    resetScreen()
+
+    addArtistInfo(artistName)
+    addAlbumInfo()
+    
+    
+    //await waitFor(1000);
     //input results in window
     openWindow()
     
+}
+
+function addAlbumInfo() {
+    //add albums to catalog
+    let catalog = document.querySelector('.projects');
+    console.log(albumTypeMap)
+    for (let catagory in albumTypeMap) {
+        
+        //if object has values
+        if (Object.keys(albumTypeMap[catagory]).length > 0) {
+            let newGroup = document.createElement('section')
+            newGroup.classList.add('project-group');
+            let groupTitle = document.createElement('h3')
+            groupTitle.innerText = (catagory + "s").toUpperCase();
+            newGroup.appendChild(groupTitle);
+            catalog.appendChild(newGroup);
+        }
+        
+    }
+    
+
+    //add albums to timeline
+}
+
+function addArtistInfo(name) {
+   let artist = artistList[name]
+   console.log(artist);
+
+   let titleName = document.querySelector('.artist-info-block h1');
+   titleName.innerText = artist.name;
+    let titleImg = document.querySelector('.artist-info-image');
+    if (artist.image.url) titleImg.src = artist.image.url;
+}
+
+function resetScreen() {
+    //find which dropdown screen is active
+    //TODO: Make this more efficient (maybe use a varaible to signify which screen is open)
+    let dropdown;
+    let options = document.querySelectorAll('#home, #catalog');
+    options.forEach(element => {
+        let hidden = element.classList.contains('hidden');
+        if (hidden) return;
+        dropdown = document.querySelector(`#${element.id} .search_dropdown`);
+        console.log(dropdown)
+    });
+    console.log(dropdown);
+    
+    //clear previous dropdown results
+    while (dropdown.firstChild) dropdown.removeChild(dropdown.firstChild);
+
+    //TODO: clear previous artist info
+    let titleName = document.querySelector('.artist-info-block h1');
+   titleName.innerText = "";
+    let titleImg = document.querySelector('.artist-info-image');
+    titleImg.src = 'blank-profile-picture.webp'
+    //TODO: clear previous albums info on both view pages
+
+    return dropdown;
+
+}
+
+//create album objects and group them into catagories
+let albumTypeMap, albumYearMap;
+function makeAlbumObjects(albums) {
+    albumTypeMap = {
+        'single': {},
+        'compilation': {},
+        'album': {}
+    };
+    albumYearMap = {};
+    for (let i = albums.length - 1; i >= 0; i--) {
+        let album = albums[i];
+        //if album has alreay been listed in album catagory list, skip it
+        if ((album.name in albumTypeMap[album.album_type]) ) continue;
+
+        //create album obj
+        let albumObj = new Album(album.name, album.album_type, album.id, album.images, album.release_date, album.total_tracks, album.artists);
+        
+        //add album to type map
+        albumTypeMap[albumObj.type][albumObj.name] = albumObj;
+
+        //add album to year map 
+        //NOTE: i didnt wantt to use slice bc performance but rlly tho idk 
+        let year = albumObj.releaseDate[0] + albumObj.releaseDate[1] +albumObj.releaseDate[2]+albumObj.releaseDate[3];
+        //if year catagory doesnt exists, create it
+        if (!albumYearMap[year]) albumYearMap[year] = {};
+        albumYearMap[year][albumObj.name] = albumObj;
+    }
+    console.log(albumTypeMap, albumYearMap);
+}
+
+class Album {
+    constructor(name, type, id, image, releaseDate, totalTracks, artists) {
+        this.name = name;
+        this.type = type;
+        this.id = id;
+        this.image = image;
+        this.releaseDate = releaseDate;
+        this. totalTracks = totalTracks;
+        this.artists = artists;
+    }
+}
+
+async function fetchAlbums(id) {
+    const requestHeaders = new Headers();
+    requestHeaders.append("content-type", "application/json");
+
+    const requestOptions = {
+        method: 'POST',
+        headers: requestHeaders,
+        body: JSON.stringify({"id": id})
+    }
+    try {
+        let res = await fetch(`http://localhost:3000/spotifyRelay/`, requestOptions);
+        let data = await res.json();
+        return data;
+        
+    } catch (err) {
+        console.log(err)
+    }
 
 }
 

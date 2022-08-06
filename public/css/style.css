@@ -140,6 +140,12 @@ body {
      height: 4rem;
      margin: 0;
      padding: 1rem 2rem;
+     display: block;
+
+     background-color: transparent;
+     border: none;
+     font: inherit;
+     color: #FFFFFF;
 }
 .search_dropdown_entry:hover {
      color: #33AA29;
@@ -207,10 +213,9 @@ body {
 .artist-info-block {
      padding: 0 25px;
 
-
      display: flex;
-     justify-content: space-between;
      align-items: center;
+     flex-wrap: wrap;
 }
 .artist-info-block .timeline-btn {
      padding: .5rem 2rem;
@@ -225,6 +230,13 @@ body {
 }
 .artist-info-block h1 {
      font-size: 9rem;
+     margin: 0;
+}
+.artist-info-image {
+     width: 100px;
+     height: auto;
+     margin-right: 20px;
+     border-radius: 10px;
 }
 .catalog-block {
      height: 600px;
@@ -279,6 +291,7 @@ body {
 .catalog-btn {
      width: 20rem;
      padding-left: 30px;
+     margin-left: auto;
 
      color: #FFFFFF;
      font-size: 2rem;
@@ -415,7 +428,7 @@ body {
 }
 .window_cover {
      background-color: #030303;
-     position: absolute;
+     position: fixed;
      bottom: 0;
      width: 100%;
      height: 0;
@@ -497,6 +510,7 @@ body {
      /* Decreases artist info name and button size for mobile*/
      .artist-info-block h1 {
           font-size: 4rem;
+          width: 62%;
      }
      .artist-info-block button {
           font-size: 2rem;
@@ -515,6 +529,13 @@ body {
      .artist-info-block .catalog-btn {
           width: 15rem;
           font-size: 1.4rem;
+          /* margin-left: 10px; */
+     }
+     .artist-info-block {
+          margin-bottom: 20px;
+     }
+     .artist-info-image {
+          width: 80px;
      }
 }
 @media screen and (max-width: 450px) {
@@ -533,8 +554,8 @@ body {
 }
 @media screen and (max-width: 400px) {
      .artist-info-block .catalog-btn {
-          width: 10rem;
-     }
+          margin-top: 15px;
+      }
      /* dropdown box resized for mobile */
      .catalog .search_dropdown {
           width: 220px;
