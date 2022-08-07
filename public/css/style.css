@@ -684,6 +684,8 @@ body::-webkit-scrollbar {
      }
      .year-group, .project-cards {
           width: 100%;
+          /* fixes timeline view on safari mobile for v13 */
+          min-height: fit-content;
      }
      .artist-info-block .timeline-btn {
           margin-top: 10px;
