@@ -77,17 +77,45 @@ router.get('/:searchtext', async (req, res) => {
 })
 
 router.post("/",async (req,res) => {
-    const id = req.body.id;
+    const artist = req.body.artist;
+    const album = req.body.album
     console.log(req.body)
-    if (id) {
-        let data = await fetchAlbums(id);
+    if (artist) {
+        let data = await fetchAlbums(artist);
+        res.json(data);
+    }
+    else if(album) {
+        let data = await fetchTracks(album);
         res.json(data);
     }
     
     else res.json('Did not work shawty');
-    //const data = await fetchArtists(searchtext);
-    
 })
+
+async function fetchTracks(albumId) {
+    let token = await getToken();
+
+    const requestHeaders = new Headers();
+    requestHeaders.append("Authorization", `Bearer ${token}`);
+
+    const requestOptions = {
+        method: 'GET',
+        headers: requestHeaders,
+    }
+    try {
+        let response = await fetch(`https://api.spotify.com/v1/albums/${albumId}/tracks?limit=50`, requestOptions);
+        
+        let data = await response.json();
+        let tracks = data.items;
+        let nextLink = data.next;
+        
+        tracks = await paginate(nextLink, requestOptions, tracks);
+        return tracks;
+    } catch (err) {
+        return { Error: err.stack }
+    }
+
+}
 
 async function fetchAlbums(artistId) {
     let token = await getToken();
