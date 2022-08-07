@@ -27,7 +27,7 @@ app.use(cors(corsOptions));
 
 //limits each ip to 1 request per second
 const limiter = rateLimit({
-    windowMs: 1000,
+    windowMs: 500,
     max: 1
 })
 app.use(limiter);
