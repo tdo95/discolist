@@ -699,6 +699,9 @@ body::-webkit-scrollbar {
      .card {
           margin: 5px;
      }
+     .card_image {
+          height: 10.5rem;
+     }
      .project-group .project-cards, .year-group .project-cards {
           margin: 0;
       }
