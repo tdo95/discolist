@@ -206,7 +206,10 @@ body {
      margin: 0 15px;
 
      justify-content: start;
-     gap: 10px;
+     /* gap: 10px; */
+}
+.nav.catalog .logo {
+     margin-right: 10px;
 }
 .nav.catalog span, .nav.catalog .search {
      align-self: center;
@@ -283,30 +286,32 @@ body {
 .project-cards {
      display: flex;
      flex-wrap: wrap;
-     gap: 30px;
+     /* gap: 30px; */
      height: fit-content;
 }
 .card {
      height: 29rem;
      width: 21rem;
      padding: 2rem;
+     margin: 15px;
 
      display: flex;
      flex-direction: column;
-     gap: 1rem;
+     /* gap: 1rem; */
 
      border-radius: 1rem;
      background: rgba(255, 255, 255, 0.05);
 }
 .card_image {
-     margin-bottom: 10px;
-
+     margin-bottom: 15px;
+     height: 18rem;
      border-radius: 1rem;
      box-shadow: 0px 2px 14px 5px rgba(0, 0, 0, 0.42);
      
 }
 .card_title {
      margin:0;
+     margin-bottom: 5px;
 }
 .card_type {
      font-weight: 400;
@@ -405,7 +410,7 @@ body {
      padding: 10px 15px;
      display: flex;
      align-items: center;
-     gap: 15px;
+     /* gap: 15px; */
 
      background: linear-gradient(rgba(255,255, 255, .1), rgba(255,255, 255, .025)),
                  linear-gradient(rgba(17,17,17,1), rgba(17,17,17,1));
@@ -413,7 +418,7 @@ body {
 .project-image {
      width: 20%;
      height: auto;
-
+     margin-right: 15px;
      border: black solid 1px;
      border-radius: 1rem;
      box-shadow: 0px 2px 14px 5px rgba(0, 0, 0, 0.42);
@@ -455,14 +460,15 @@ body {
      padding: 15px 25px;
      display: flex;
      align-items: center;
-     gap: 7%;
+     /* gap: 7%; */
 }
 .track-name {
      margin: .5rem 0;
-
      font-size: 1.5rem;
 }
-
+.track_details {
+     margin-left: 7%;
+}
 .track-name a:hover {
      color: #33AA29;
 }
@@ -625,14 +631,13 @@ body::-webkit-scrollbar {
           text-align: center;
      }
      .project-group .project-cards, .year-group .project-cards {
-          gap: 15px;
+          margin: 15px;
           font-size: 1.2rem;
           justify-content: center;
      }
      .card {
           height: 18rem;
           width: 12rem;
-          gap: .5rem;
           padding: 1.3rem;
      }
      .artist-info-block .catalog-btn {
@@ -653,7 +658,7 @@ body::-webkit-scrollbar {
 @media screen and (max-width: 450px) {
      .year-group {
           flex-direction: column;
-          gap: 10px;
+          margin: 10px;
      }
      .year-marker h3 {
           margin: 0;
@@ -691,6 +696,12 @@ body::-webkit-scrollbar {
      .artist-info-block div {
           width: 62%;
      }
+     .card {
+          margin: 5px;
+     }
+     .project-group .project-cards, .year-group .project-cards {
+          margin: 0;
+      }
      /* .genres span {
           font-size: 1.3rem;
      } */
@@ -701,7 +712,7 @@ body::-webkit-scrollbar {
           width: 220px;
      } 
      .project-group .project-cards {
-          gap: 25px;
+          margin: 0;
      }
      .artist-info-block .timeline-btn {
           font-size: 1.7rem;
