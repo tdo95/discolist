@@ -55,7 +55,7 @@ async function fetchArtists(input) {
     if (!input) return;
     console.log(input);
     try {
-        let response = await fetch(`http://localhost:3000/spotifyRelay/${input}`);
+        let response = await fetch(`https://spotify-relay.glitch.me/spotifyRelay/${input}`);
         let data = await response.json();
         console.log(data)
         return data.artists.items;
@@ -398,7 +398,7 @@ async function fetchAlbums(id) {
         body: JSON.stringify({"artist": id})
     }
     try {
-        let res = await fetch(`http://localhost:3000/spotifyRelay/`, requestOptions);
+        let res = await fetch(`https://spotify-relay.glitch.me/spotifyRelay/`, requestOptions);
         let data = await res.json();
         console.log(data)
         return data;
@@ -436,7 +436,7 @@ async function fetchTracks(id) {
         body: JSON.stringify({"album": id})
     }
     try {
-        let res = await fetch(`http://localhost:3000/spotifyRelay/`, requestOptions);
+        let res = await fetch(`https://spotify-relay.glitch.me/spotifyRelay/`, requestOptions);
         let data = await res.json();
         console.log(data);
         return data;
