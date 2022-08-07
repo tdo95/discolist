@@ -245,6 +245,15 @@ body {
      margin-right: 20px;
      border-radius: 10px;
 }
+.genres {
+     margin-top: 3px;
+     margin-bottom: 0;
+     font-size: 2rem;
+     font-weight: 300;
+}
+.genres span {
+     font-weight: 600;
+}
 .catalog-block {
      height: 600px;
      padding: 3rem 2.5rem;
@@ -433,6 +442,16 @@ body {
 
      background-color: #121212;
 }
+.tracklist a:link, .tracklist a:visited, .details_title a:link, .details_title a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+.details_title a:hover {
+     text-decoration: solid underline 1px #FFFFFF;
+}
+.tracklist a:hover {
+     color: #33AA29;
+}
 .track {
      padding: 15px 25px;
      display: flex;
@@ -443,6 +462,10 @@ body {
      margin: .5rem 0;
 
      font-size: 1.5rem;
+}
+
+.track-name a:hover {
+     color: #33AA29;
 }
 .track-time {
      margin-left: auto;
@@ -504,7 +527,6 @@ body::-webkit-scrollbar {
 }
 
 /* HOME PAGE STYLES */
-
 @media screen and (max-width: 650px) {
      /* NOTE: Set width accoriding to font size */
      .title {
@@ -532,10 +554,16 @@ body::-webkit-scrollbar {
 }
 
 /* CATALOG PAGE STYLES */
+@media screen and (min-width: 730px) {
+     .artist-info-block div {
+          width: 60%;
+     }
+     
+}
 @media screen and (max-width: 830px) {
      /* Decreases artist info name and button size for mobile*/
      .artist-info-block h1 {
-          font-size: 6rem;
+          font-size: 5rem;
      }
 }
 @media screen and (max-width: 730px) {
@@ -582,7 +610,9 @@ body::-webkit-scrollbar {
      /* Decreases artist info name and button size for mobile*/
      .artist-info-block h1 {
           font-size: 4rem;
-          width: 62%;
+     }
+     .artist-info-block div {
+          width: 75%;
      }
      .artist-info-block button {
           font-size: 2rem;
@@ -599,9 +629,7 @@ body::-webkit-scrollbar {
           gap: 15px;
           font-size: 1.2rem;
           justify-content: center;
-          
      }
-
      .card {
           height: 18rem;
           width: 12rem;
@@ -618,6 +646,9 @@ body::-webkit-scrollbar {
      }
      .artist-info-image {
           width: 80px;
+     }
+     .genres {
+          font-size: 1.5rem;
      }
 }
 @media screen and (max-width: 450px) {
@@ -657,8 +688,13 @@ body::-webkit-scrollbar {
      }
      .catalog .search_dropdown {
           top: 60px;
-     } 
-     
+     }
+     .artist-info-block div {
+          width: 62%;
+     }
+     /* .genres span {
+          font-size: 1.3rem;
+     } */
 }
 @media screen and (max-width: 400px) {
      /* dropdown box resized for mobile */
@@ -681,10 +717,7 @@ body::-webkit-scrollbar {
      .catalog .search_dropdown {
           width: 180px;
           right: 44px;
-     }   
-     .details_title {
-          font-size: 2rem;
-     }  
+     }    
 }
 /* MODAL SCREEN STYLES */
 @media screen AND (max-width: 1000px) {
@@ -704,7 +737,7 @@ body::-webkit-scrollbar {
           margin-top: 15px;
       }
       .details_title {
-          font-size: 2.5rem;
+          font-size: 2rem;
       }
       .track-name {
           font-size: 1.5rem;

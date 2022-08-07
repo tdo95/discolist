@@ -46,7 +46,7 @@ function getSearchResults(e) {
     timeout = setTimeout(async () => {
         let data = await fetchArtists(e.value)
         makeArtistObjects(data);
-        displayArtistsResults();
+        displayArtistSearchResults();
     }, 450);
 }
 
@@ -57,6 +57,7 @@ async function fetchArtists(input) {
     try {
         let response = await fetch(`http://localhost:3000/spotifyRelay/${input}`);
         let data = await response.json();
+        console.log(data)
         return data.artists.items;
     } catch (err) {
         console.log(err);
@@ -65,12 +66,13 @@ async function fetchArtists(input) {
 
 //Artist class stores information about each artist returned from search
 class Artist {
-    constructor(name, href, image, id, popularity) {
+    constructor(name, href, image, id, popularity, genres) {
         this.name = name;
         this.href = href;
         this.image = image;
         this.id = id;
         this.popularity = popularity;
+        this.genres = genres;
     }
 }
 
@@ -82,14 +84,14 @@ function makeArtistObjects(artists) {
     if (artists === undefined) artistList = null;
     else {
         for (let person of artists) {
-            let artist = new Artist(person.name, person.href, person.images[0], person.id, person.popularity);
+            let artist = new Artist(person.name, person.href, person.images[0], person.id, person.popularity, person.genres);
             artistList[artist.name] = artist;
         }
     }
 }
 
 //displays artist results in DOM
-function displayArtistsResults() {
+function displayArtistSearchResults() {
    //get dropdown that's active (either home or catalog)
     let dropdown = getDropdown();
     //clear previous dropdown results
@@ -280,6 +282,8 @@ function addArtistInfoToPage(name) {
         if ((![...artist.name].includes(' ') && artist.name.length > 7) || artist.name.length > 20) titleName.style.fontSize = "2rem";
     }
     titleName.innerText = artist.name;
+    //inputs the first 3 genres if present
+    document.querySelector('.genres').innerHTML = `<span> Genres: </span> ${artist.genres[0] ? artist.genres[0] : "N/A" }${artist.genres[1] ? ", " + artist.genres[1]  : "" }${artist.genres[2] ? ", " + artist.genres[2] : "" }`
     let titleImg = document.querySelector('.artist-info-image');
     if (artist.image?.url) titleImg.src = artist.image.url;
 }
@@ -335,7 +339,7 @@ function makeAlbumObjects(albums) {
         //NOTE: i didnt wantt to use slice bc performance but rlly tho idk 
         let year = album.release_date[0] + album.release_date[1] +album.release_date[2]+album.release_date[3];     
         //create album obj
-        let albumObj = new Album(album.name, album.album_type, album.id, album.images, album.release_date, year, album.total_tracks, album.artists);
+        let albumObj = new Album(album.name, album.album_type, album.id, album.images, album.release_date, year, album.total_tracks, album.artists, album.external_urls.spotify);
         //add album to type map
         albumTypeMap[albumObj.type][albumObj.name] = albumObj;
         //track album years, if year catagory doesnt exists, create it
@@ -371,7 +375,7 @@ function addYearGroupsToTimeline(yearList) {
 }
 
 class Album {
-    constructor(name, type, id, image, releaseDate, year, totalTracks, artists) {
+    constructor(name, type, id, image, releaseDate, year, totalTracks, artists, externalLink) {
         this.name = name;
         this.type = type;
         this.id = id;
@@ -380,6 +384,7 @@ class Album {
         this.year = year;
         this. totalTracks = totalTracks;
         this.artists = artists;
+        this.externalLink = externalLink;
     }
 }
 
@@ -395,6 +400,7 @@ async function fetchAlbums(id) {
     try {
         let res = await fetch(`http://localhost:3000/spotifyRelay/`, requestOptions);
         let data = await res.json();
+        console.log(data)
         return data;
         
     } catch (err) {
@@ -456,7 +462,7 @@ function addAlbumInfoToModal(album) {
     }
     else if (album.name.length > 75) title.style.fontSize = '1rem'
     
-    title.innerText = album.name
+    title.innerHTML = `<a href="${album.externalLink}" target="_blank">${album.name}</a>`
     artists.innerHTML = `${album.artists.map(obj => obj.name).join(', ')} &#8226; <span class="details_year">${album.year}</span> &#8226; <span class="details_amount">${album.totalTracks} Songs</span>`
 }
 
@@ -470,18 +476,19 @@ function addTracksToModal(tracks) {
         let h = parseInt(track.duration_ms / 3600000) 
         let m = parseInt((track.duration_ms - (h * 3600000)) / 60000);
         let s = (parseInt((track.duration_ms - (h * 3600000) - (m * 60000)) / 1000) + "").padStart(2, '0');
-        console.log(track.duration_ms, h,m,s)
         h = h > 1 ? h + ":" : "";
         m = m > 1 ? m + ":" : "0:";
-        console.log(h,m,s)
-
         newTrack.innerHTML = `<span class="track_num">${track.track_number}</span>
                             <div class="track_details">
-                                <h5 class="track-name">${track.name}</h5>
+                            <h5 class="track-name">${track.name}</h5>
                                 <span class="track-artist">${track.artists.map(obj => obj.name).join(', ')}</span>
                             </div>
                             <span class="track-time">${h}${m}${s}</span>`
-        tracklist.appendChild(newTrack);
+        let trackLink = document.createElement('a');
+        trackLink.href = track.external_urls.spotify;
+        trackLink.target = "_blank";
+        trackLink.appendChild(newTrack);
+        tracklist.appendChild(trackLink);
     }
 }
 
