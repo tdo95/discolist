@@ -102,7 +102,7 @@ body {
 
      border: none;
      outline: none;
-     background-color: rgba(0, 0, 0, 0);  
+     background-color: transparent;  
 }
 .catalog .search_dropdown {
      height: fit-content;
