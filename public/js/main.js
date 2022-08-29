@@ -47,7 +47,7 @@ function getSearchResults(e) {
         let data = await fetchArtists(e.value)
         makeArtistObjects(data);
         displayArtistSearchResults();
-    }, 450);
+    }, 250);
 }
 
 //fetch artists from Spotify API via API Relay on server
