@@ -182,7 +182,7 @@ function setCatalogScreen() {
 function addAlbumInfoToPages() {
     //add albums to catalog
     let catalog = document.querySelector('.projects');
-    console.log(albumTypeMap)
+    
     for (let catagory in albumTypeMap) {
         
         //if catagory object has values
@@ -275,7 +275,7 @@ function createCard(album, catagory, type) {
 
 function addArtistInfoToPage(name) {
     let artist = artistList[name];
-    console.log(artist);
+    
     let titleName = document.querySelector('.artist-info-block h1');
     //reduces text size if title is long on mobile
     if (window.innerWidth <= 500 ) {
@@ -299,7 +299,7 @@ function getDropdown() {
         if (hidden) return;
         dropdown = document.querySelector(`#${element.id} .search_dropdown`);
     });
-    console.log(dropdown);
+    
     return dropdown;
 }
 
@@ -349,19 +349,19 @@ function makeAlbumObjects(albums) {
     //create year group in timeline
     albumYearList.sort((a,b) => b - a);
     addYearGroupsToTimeline(albumYearList);
-    console.log(albumTypeMap, albumYearList);
+    
 }
 
 function addYearGroupsToTimeline(yearList) {
     let timeline = document.querySelector(`.timeline`);
-    console.log(timeline)
+    
     for (let year of yearList) {
         
         let yearMarker = document.createElement('div');
         yearMarker.classList.add(`year-marker`);
         yearMarker.innerHTML = `<h3>${year}</h3><div class="line"></div>`
         timeline.appendChild(yearMarker);
-        console.log(timeline)
+        
 
         //TODO: Refractor this later so that we're not creating two groups
         let yearGroup = document.createElement('section');
@@ -426,7 +426,7 @@ const waitFor = delay => new Promise(resolve => setTimeout(resolve, delay));
 //////////////////////////////////////////////////////////////////////////////////////////////// DISPLAY MODAL WINDOW WITH ALBUM TRACKS
 
 async function fetchTracks(id) {
-    console.log(id, ' clicked')
+    
     const requestHeaders = new Headers();
     requestHeaders.append("content-type", "application/json");
 
@@ -455,7 +455,7 @@ function addAlbumInfoToModal(album) {
     if (album.image?.[1]) img.src = album.image[1].url;
     else img.src = "blank-profile-picture.webp";
     type.innerText = album.type.toUpperCase();
-    console.log(album.name, album.name.length)
+    
     if (album.name.length > 40) {
         if (window.innerWidth < 500) title.style.fontSize = '1.3rem'
         else title.style.fontSize = '2rem'
