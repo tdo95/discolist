@@ -398,7 +398,7 @@ async function fetchAlbums(id) {
         body: JSON.stringify({"artist": id})
     }
     try {
-        let res = await fetch(`https://spotify-relay.glitch.me/spotifyRelay/`, requestOptions);
+        let res = await fetch(`/spotifyRelay`, requestOptions);
         let data = await res.json();
         console.log(data)
         return data;
@@ -436,7 +436,7 @@ async function fetchTracks(id) {
         body: JSON.stringify({"album": id})
     }
     try {
-        let res = await fetch(`https://spotify-relay.glitch.me/spotifyRelay/`, requestOptions);
+        let res = await fetch(`/spotifyRelay`, requestOptions);
         let data = await res.json();
         console.log(data);
         return data;

@@ -10,7 +10,7 @@ const spotify = require("./spotifyRelay");
 app.use(express.json());
 
 //URLS permited to access the routes
-const whitelist = ['https://localhost:3000'];
+const whitelist = ['https://discolist.cyclic.app'];
 
 //protects routes 
 const corsOptions = {
@@ -24,7 +24,7 @@ const corsOptions = {
     optionsSuccessStatus: 200
 }
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 
 //limits each ip to 1 request per second
