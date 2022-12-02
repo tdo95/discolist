@@ -2,10 +2,10 @@
   "name": "discolist",
   "version": "1.0.0",
   "description": "'Look up the discography of music artists'",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",

@@ -3,37 +3,42 @@ const express = require("express");
 const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const spotify = require("./spotifyRelay");
 
 app.use(express.json());
 
 //URLS permited to access the routes
-const whitelist = [];
+const whitelist = ['https://localhost:3000'];
 
 //protects routes 
 const corsOptions = {
     origin: (origin, callback) => {
-        // if (!origin || whitelist.indexOf(origin) !== -1) {
-        //     callback(null, true);
-        // } else callback(new Error ("Not allowed by CORS"));
-        callback(null, true);
+        console.log(origin)
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else callback(new Error ("Not allowed by CORS"));
+          // callback(null, true);
     },
     optionsSuccessStatus: 200
 }
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+
 
 //limits each ip to 1 request per second
 const limiter = rateLimit({
-    windowMs: 500,
-    max: 1
+    windowMs: 1000,
+    max: 100
 })
-app.use(limiter);
+// app.use(limiter);
 
-//test route
-app.get("/", (req, res) => res.json({success: "Hello World!"}));
+//set app to source files from public folder
+app.use(express.static('public'));
+
+//main route
+app.get("/", (req, res) => res.render("index"));
 
 app.use("/spotifyRelay", spotify);
 

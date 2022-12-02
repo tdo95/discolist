@@ -53,11 +53,11 @@ function getSearchResults(e) {
 //fetch artists from Spotify API via API Relay on server
 async function fetchArtists(input) {
     if (!input) return;
-    console.log(input);
+    
     try {
-        let response = await fetch(`https://spotify-relay.glitch.me/spotifyRelay/${input}`);
+        let response = await fetch(`/spotifyRelay/${input}`);
         let data = await response.json();
-        console.log(data)
+      
         return data.artists.items;
     } catch (err) {
         console.log(err);
