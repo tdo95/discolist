@@ -76,7 +76,6 @@
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
-<br />
 
 
 <!-- ABOUT THE PROJECT -->
@@ -94,7 +93,9 @@ For people that love looking up the music catalog of artists they've recently di
 
 ### How Its Made
 
-DiscoList is a web application that uses Spotify's API to collect data on each artists music catalog and serves this information on an interface inspired by Spotify’s web app design. The application is built with the following technologies:
+DiscoList is a web application that uses Spotify's API to collect data on each artists music catalog and serves this information on an interface inspired by Spotify’s web app design. 
+
+The application is built with the following technologies:
 
  [![HTML][HTML5]][HTML5-url]
  [![CSS][CSS3]][CSS3-url]
