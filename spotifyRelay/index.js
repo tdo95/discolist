@@ -1,6 +1,22 @@
 const express = require("express");
 const router = express.Router();
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const cors = require("cors");
+
+//URLS permited to access the routes
+const whitelist = ['https://discolist.cyclic.app'];
+
+//protects routes 
+const corsOptions = {
+    origin: (origin, callback) => {
+        console.log(origin)
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else callback(new Error ("Not allowed by CORS"));
+          // callback(null, true);
+    },
+    optionsSuccessStatus: 200
+}
 
 //send request to authorization server to recieve access token
 var expires;
@@ -68,7 +84,7 @@ const fetchArtists = async (searchtext) => {
 router.get("/", (req, res) => {
     res.json({success: "Hello Spotify!"});
 });
-router.get('/:searchtext', async (req, res) => {
+router.get('/:searchtext', cors(corsOptions), async (req, res) => {
    
     const searchtext = req.params.searchtext;
     let data = await fetchArtists(searchtext);
@@ -76,7 +92,7 @@ router.get('/:searchtext', async (req, res) => {
 
 })
 
-router.post("/",async (req,res) => {
+router.post("/", cors(corsOptions), async (req,res) => {
     const artist = req.body.artist;
     const album = req.body.album
     console.log(req.body)
