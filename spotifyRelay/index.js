@@ -4,7 +4,7 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 const cors = require("cors");
 
 //URLS permited to access the routes
-const whitelist = ['https://discolist.cyclic.app'];
+const whitelist = ['https://discolist.cyclic.app', 'https://discolist.cyclic.app/'];
 
 //protects routes 
 const corsOptions = {
@@ -88,6 +88,7 @@ router.get('/:searchtext', cors(corsOptions), async (req, res) => {
    
     const searchtext = req.params.searchtext;
     let data = await fetchArtists(searchtext);
+    console.log(data)
     res.json(data)
 
 })

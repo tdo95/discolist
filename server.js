@@ -8,6 +8,12 @@ const spotify = require("./spotifyRelay");
 
 app.use(express.json());
 
+//middle ware to accommodate browsers that remove origin header from requests
+app.use(function (req, res, next) {
+    req.headers.origin = req.headers.origin || req.headers.referer;
+    next();
+});
+
 //limits each ip to 1 request per second
 const limiter = rateLimit({
     windowMs: 1000,
