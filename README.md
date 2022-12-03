@@ -93,9 +93,7 @@ For people that love looking up the music catalog of artists they've recently di
 
 ### How Its Made
 
-DiscoList is a web application that uses Spotify's API to collect data on each artists music catalog and serves this information on an interface inspired by Spotify’s web app design. 
-
-The application is built with the following technologies:
+DiscoList is a web application that uses Spotify's API to collect data on each artists music catalog and serves this information on an interface inspired by Spotify’s web app design. The application is built with the following technologies:
 
  [![HTML][HTML5]][HTML5-url]
  [![CSS][CSS3]][CSS3-url]
@@ -103,7 +101,7 @@ The application is built with the following technologies:
  [![Node][Node.js]][Node.js-url]
  [![Express][Express.js]][Express.js-url]
  [![Spotify][Spotify-api]][Spotify-url]
-
+<br><br>
 
 
 <!-- GETTING STARTED -->
@@ -157,7 +155,7 @@ _Follow the steps below to set up the application locally._
    ```sh
    "localhost:3000"
    ```
-
+<br><br>
 
 <!-- OPTIMIZATIONS -->
 ## Optimizations
@@ -173,7 +171,7 @@ _Follow the steps below to set up the application locally._
 - Safari v14 only recently implemented the gap property for Flexbox, later versions will need alternative styling
 - OAuth authentication convention and the different flows involved (implicit grant, client credentials, authentication grant etc.)
 - How  to implement CORS module to block unapproved user from accessing routes
-
+<br><br>
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -182,7 +180,7 @@ _Follow the steps below to set up the application locally._
 - [x] Create Timeline view
 - [x] Add tracklist modal for each album
 - [ ] Add artist specific information (i.e. place of origin, birthday, age, government name) using Media Wiki API
-
+<br><br>
 <!-- See the [open issues](https://github.com/tdo95/discolist/issues) for a list of proposed features (and known issues). -->
 
 
